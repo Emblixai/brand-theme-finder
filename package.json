@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "node-vibrant": "^4.0.4",
+    "tinycolor2": "^1.6.0"
+  }
+}

@@ -1,0 +1,1004 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, Arial, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #111827;
+}
+
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.app {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  background: #eef6ff;
+  border-bottom: 1px solid #dbeafe;
+  padding: 30px 20px 24px;
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.hero h1 {
+  display: inline-block;
+
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.1;
+
+  margin: 0;
+  padding: 0;
+
+  background-image: linear-gradient(
+    90deg,
+    #7c3aed 0%,
+    #2563eb 50%,
+    #06b6d4 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  margin-top: 12px;
+
+  font-size: 20px;
+  color: #4b5563;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.container {
+  width: 100%;
+  max-width: 1250px;
+
+  margin: auto;
+  padding: 35px 20px 60px;
+}
+
+
+/* =========================================================
+   SEARCH CARD
+========================================================= */
+
+.search-card {
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+
+  padding: 28px;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.search-card label {
+  display: block;
+
+  text-align: left;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  color: #374151;
+
+  margin-bottom: 10px;
+}
+
+.search-box {
+  display: flex;
+  gap: 14px;
+}
+
+.search-box input {
+  flex: 1;
+
+  height: 58px;
+
+  padding: 0 18px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+
+  font-size: 17px;
+
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: #2563eb;
+}
+
+.search-box button {
+  width: 180px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #111827;
+  color: #ffffff;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    opacity 0.2s ease;
+}
+
+.search-box button:hover:not(:disabled) {
+  background: #1f2937;
+}
+
+.search-box button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.search-box button:disabled {
+  opacity: 0.85;
+  cursor: wait;
+}
+
+.disclaimer {
+  margin-top: 8px;
+
+  text-align: left;
+
+  font-size: 12px;
+  color: #6b7280;
+
+  font-style: italic;
+}
+
+
+/* =========================================================
+   ANALYZE BUTTON
+========================================================= */
+
+.analyze-button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+}
+
+.analyze-button:disabled {
+  cursor: wait;
+}
+
+
+/* =========================================================
+   LOADING SPINNER
+========================================================= */
+
+.spinner {
+  width: 15px;
+  height: 15px;
+
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   RESULT HEADER
+========================================================= */
+
+.result-header {
+  margin: 30px 0;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+}
+
+.result-header {
+  display: block;
+}
+
+.result-header span,
+.result-header a {
+  display: inline;
+}
+
+
+.result-header h2 {
+  font-size: 30px;
+  color: #111827;
+}
+
+
+/* =========================================================
+   COLOR SECTIONS
+========================================================= */
+
+.section {
+  margin-bottom: 28px;
+}
+
+.section h2 {
+  font-size: 21px;
+
+  margin-bottom: 12px;
+
+  color: #111827;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   COLOR GRID
+========================================================= */
+
+.cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 16px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   COLOR CARD
+========================================================= */
+
+.color-card {
+  overflow: hidden;
+  border: 1px solid #d8dee8;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.color-preview {
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.hex-code {
+  font-size: 25px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.998);
+}
+
+/* HEX copied message */
+.copied-hex {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+
+  padding: 4px 8px;
+
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+
+  border-radius: 4px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   UPPER HALF
+   HEX + CHECKBOX
+========================================================= */
+
+.color-preview {
+  position: relative;
+
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  padding: 8px 10px;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEX CODE
+========================================================= */
+
+/*
+   HEX is normal text.
+   No white box.
+   No pseudo-element.
+   No duplicate HEX.
+*/
+
+.hex-code,
+.color-hex {
+  display: block;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  line-height: 17px;
+
+  color: #ffffff;
+
+  background: transparent;
+
+  padding: 0;
+  margin: 0;
+
+  user-select: none;
+
+  cursor: pointer;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.85),
+    0 0 4px rgba(0, 0, 0, 0.45);
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.hex-code:hover,
+.color-hex:hover {
+  opacity: 0.9;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.color-checkbox {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  width: 14px;
+  height: 14px;
+
+  margin: 0;
+
+  cursor: pointer;
+
+  z-index: 5;
+
+  accent-color: #111827;
+}
+
+
+/* =========================================================
+   BOTTOM HALF
+   RGB + USAGE
+========================================================= */
+
+.color-info {
+  position: relative;
+
+  min-height: 47px;
+
+  padding: 9px 10px;
+
+  background: #ffffff;
+
+  box-sizing: border-box;
+
+  cursor: pointer;
+}
+
+.color-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   RGB CODE
+========================================================= */
+
+.rgb-code {
+  font-size: 10px;
+  font-weight: 500;
+
+  color: #111827;
+
+  user-select: none;
+
+  cursor: pointer;
+
+  transition: opacity 0.15s ease;
+}
+
+.rgb-code:hover {
+  opacity: 0.6;
+}
+
+
+/*
+   Supports the existing JSX if RGB is
+   rendered using .color-row span.
+*/
+
+.color-row span {
+  font-size: 10px;
+  font-weight: 500;
+
+  color: #111827;
+
+  user-select: none;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition: opacity 0.15s ease;
+}
+
+.color-row span:hover {
+  opacity: 0.6;
+}
+
+
+/* =========================================================
+   USAGE
+========================================================= */
+
+.usage {
+  font-size: 10px;
+
+  font-weight: 600;
+
+  color: #111827;
+
+  white-space: nowrap;
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   COPY MESSAGE
+========================================================= */
+
+.copied {
+  position: absolute;
+
+  left: 50%;
+  bottom: 5px;
+
+  transform: translateX(-50%);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  color: #ffffff;
+
+  pointer-events: none;
+
+  animation: copyFade 1s ease;
+}
+
+
+/* =========================================================
+   OPTIONAL COPY MESSAGE CLASSES
+========================================================= */
+
+.copy-message {
+  font-size: 11px;
+
+  font-weight: 600;
+
+  pointer-events: none;
+
+  animation: copyFade 1s ease;
+}
+
+.hex-copy-message {
+  position: absolute;
+
+  left: 10px;
+  top: 30px;
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.8);
+
+  pointer-events: none;
+
+  z-index: 4;
+}
+
+.rgb-copy-message {
+  margin-top: 4px;
+}
+
+
+/* =========================================================
+   COPY ANIMATION
+========================================================= */
+
+@keyframes copyFade {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, 3px);
+  }
+
+  20% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, 0);
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -3px);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .hero {
+    padding: 40px 20px 32px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 18px;
+    margin-top: 8px;
+  }
+
+  .container {
+    padding: 24px 16px 50px;
+  }
+
+  .search-card {
+    padding: 20px;
+  }
+
+  .search-box {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .search-box input {
+    width: 100%;
+    height: 54px;
+  }
+
+  .search-box button {
+    width: 100%;
+    height: 54px;
+  }
+
+  .result-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+  .result-header h2 {
+    font-size: 28px;
+  }
+
+  .section h2 {
+    font-size: 20px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+  .color-preview {
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.hex-code {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.7);
+}
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+  .hero {
+    padding: 30px 15px 25px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 20px 12px 40px;
+  }
+
+  .search-card {
+    padding: 16px;
+  }
+
+  .result-header h2 {
+    font-size: 23px;
+  }
+
+  .color-card {
+    border-radius: 9px;
+  }
+
+  .color-preview {
+    height: 50px;
+  }
+
+  .hex-code,
+  .color-hex {
+    font-size: 11px;
+  }
+
+  .color-info {
+    min-height: 46px;
+    padding: 9px;
+  }
+
+  .color-row span,
+  .rgb-code {
+    font-size: 10px;
+  }
+
+  .usage {
+    font-size: 10px;
+  }
+}
+.copied-rgb {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+
+  padding: 4px 8px;
+
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+
+  border-radius: 4px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+
+  z-index: 2;
+
+  pointer-events: none;
+  animation: copyFade 1s ease;
+}
+.color-info {
+  position: relative;
+}
+
+.copied-rgb {
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+
+  transform: translateX(-50%);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  color: #ffffff !important;
+
+  pointer-events: none;
+
+  animation: copyFade 1s ease;
+}.hex-selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.hex-selection input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+}
+/* =========================================================
+   CURRENT COLOR THEME PREVIEW
+========================================================= */
+
+.current-theme {
+  margin: 18px 0 24px;
+}
+
+.current-theme h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.theme-preview-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 0;
+  width: 100%;
+}
+
+.theme-color-box {
+  width: 72px;
+  text-align: center;
+}
+
+.theme-color-label {
+  font-size: 10px;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.current-theme .theme-preview-group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.current-theme .theme-preview-group + .theme-preview-group {
+  border-left: 1px solid rgba(120, 130, 145, 0.35);
+  padding-left: 16px;
+  margin-left: 16px;
+}
+
+
+.theme-color-swatch {
+  width: 72px;
+  height: 48px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-color-swatch span {
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.theme-color-label {
+  margin-top: 5px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.more-colors-option {
+  margin-top: 8px;
+}
+
+.more-colors-option label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.full-website-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.scanning-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #d9d9d9;
+  border-top-color: #4472C4;
+  border-radius: 50%;
+  animation: websiteScanSpin 0.8s linear infinite;
+}
+
+@keyframes websiteScanSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.color-card-selected {
+  border: 2px solid #1f2937;
+  box-shadow: 0 0 0 3px rgba(31, 41, 55, 0.12);
+}
+
+.selected-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: #1f2937;
+  color: #ffffff;
+  margin-left: auto;
+}
+
+.reset-button {
+  display: block;
+  width: 120px;
+  height: 44px;
+  margin-left: auto;
+  margin-top: 10px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #374151;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.reset-button:active {
+  transform: scale(0.98);
+}
+.current-theme {
+  position: sticky;
+  top: 10px;
+  z-index: 1000;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 14px 18px 16px;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(210, 218, 230, 0.85);
+  border-radius: 12px;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.10);
+
+  margin-bottom: 18px;
+}
+

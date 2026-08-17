@@ -109,3 +109,35 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+.generate-ppt-button {
+  width: 135px;
+  height: 28px;
+  padding: 4px 8px;
+
+  background: #111827;
+  color: #ffffff;
+
+  border: 1px solid #111827;
+  border-radius: 5px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  box-sizing: border-box;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.generate-ppt-button:hover {
+  background: #254f4a;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.generate-ppt-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

@@ -2,14 +2,50 @@ const PptxGenJS = require("pptxgenjs");
 const JSZip = require("jszip");
 const fs = require("fs");
 
-async function generatePptTheme(colors, outputPath) {
-  if (!Array.isArray(colors) || colors.length === 0) {
-    throw new Error("At least one color is required.");
+async function generatePptTheme(theme, outputPath) {
+  if (!theme || typeof theme !== "object") {
+    throw new Error("A valid theme is required.");
   }
 
-  const selectedColors = colors
-    .slice(0, 6)
-    .map((color) => color.replace("#", "").toUpperCase());
+  const accents = Array.isArray(theme.accents)
+    ? theme.accents.slice(0, 6)
+    : [];
+
+  const text = Array.isArray(theme.text)
+    ? theme.text.slice(0, 2)
+    : [];
+
+  const background = Array.isArray(theme.background)
+    ? theme.background.slice(0, 2)
+    : [];
+
+  if (
+    accents.length !== 6 ||
+    text.length !== 2 ||
+    background.length !== 2
+  ) {
+    throw new Error("Complete theme colours are required.");
+  }
+
+  const cleanColor = (color) =>
+    String(color)
+      .replace("#", "")
+      .toUpperCase();
+
+  const selectedColors = {
+    accent1: cleanColor(accents[0]),
+    accent2: cleanColor(accents[1]),
+    accent3: cleanColor(accents[2]),
+    accent4: cleanColor(accents[3]),
+    accent5: cleanColor(accents[4]),
+    accent6: cleanColor(accents[5]),
+
+    text1: cleanColor(text[0]),
+    text2: cleanColor(text[1]),
+
+    background1: cleanColor(background[0]),
+    background2: cleanColor(background[1]),
+  };
 
   const pptx = new PptxGenJS();
 
@@ -45,25 +81,28 @@ async function generatePptTheme(colors, outputPath) {
 
   let themeXml = await themeFile.async("string");
 
-  const accentNames = [
-    "accent1",
-    "accent2",
-    "accent3",
-    "accent4",
-    "accent5",
-    "accent6",
-  ];
+  const themeColors = {
+    dk1: selectedColors.text1,
+    lt1: selectedColors.background1,
+    dk2: selectedColors.text2,
+    lt2: selectedColors.background2,
 
-  selectedColors.forEach((color, index) => {
-    const accentName = accentNames[index];
+    accent1: selectedColors.accent1,
+    accent2: selectedColors.accent2,
+    accent3: selectedColors.accent3,
+    accent4: selectedColors.accent4,
+    accent5: selectedColors.accent5,
+    accent6: selectedColors.accent6,
+  };
 
+  Object.entries(themeColors).forEach(([name, color]) => {
     const regex = new RegExp(
-      `(<a:${accentName}>\\s*<a:)(srgbClr|sysClr)([^>]*)(?:\\/>|>.*?<\\/a:(?:srgbClr|sysClr)>)`,
+      `(<a:${name}>\\s*<a:)(srgbClr|sysClr)([^>]*)(?:\\/>|>.*?<\\/a:(?:srgbClr|sysClr)>)`,
       "s"
     );
 
     const replacement =
-      `<a:${accentName}><a:srgbClr val="${color}"/></a:${accentName}>`;
+      `<a:${name}><a:srgbClr val="${color}"/></a:${name}>`;
 
     themeXml = themeXml.replace(regex, replacement);
   });

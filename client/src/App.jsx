@@ -189,6 +189,33 @@ const [generatingPpt, setGeneratingPpt] = useState(false);
   "#70AD47",
 ];
 
+const defaultTextColors = [
+  "#000000",
+  "#44546A",
+];
+
+const defaultBackgroundColors = [
+  "#FFFFFF",
+  "#E7E6E6",
+];
+
+const currentTheme = {
+  accents: selectedColors.map(
+    (color, index) =>
+      color || defaultAccentColors[index]
+  ),
+
+  text: [
+    text1Color,
+    text2Color,
+  ],
+
+  background: [
+    background1Color,
+    background2Color,
+  ],
+};
+
 function handleColorSelection(color, isChecked) {
 
   // ==========================================
@@ -365,11 +392,7 @@ function handleColorSelection(color, isChecked) {
 }
 
 async function generatePptThemeFile() {
-  if (selectedColors.length === 0) {
-    alert("Please select at least one colour.");
-    return;
-  }
-
+  
   try {
     setGeneratingPpt(true);
 
@@ -379,8 +402,8 @@ async function generatePptThemeFile() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        colors: selectedColors,
-      }),
+  theme: currentTheme,
+}),
     });
 
     if (!response.ok) {
@@ -749,7 +772,7 @@ setBackground2Color("#E7E6E6");
           }}
         />
 
-        I need more colors from this website
+        I need more colours from this website
 
       </label>
     </div>
@@ -806,7 +829,7 @@ setBackground2Color("#E7E6E6");
 <div className="result-header">
 
   <span>
-    Colors extracted from{" "}
+    Colours extracted from{" "}
   </span>
 
   <a
@@ -828,7 +851,7 @@ setBackground2Color("#E7E6E6");
 )}
 
 <div className="current-theme">
-  <h3>Select colours from search results to customise the theme preview</h3>
+  <h3>Customize the theme colours by selecting from the cards below</h3>
 
   <div className="theme-preview-row">
 
@@ -1156,12 +1179,6 @@ setBackground2Color("#E7E6E6");
       </div>
     </div>
 
-  </div>
-
-</div>
-
-</div>
-
 <div className="ppt-theme-action">
   <button
     className="generate-ppt-button"
@@ -1175,6 +1192,12 @@ setBackground2Color("#E7E6E6");
       ? "Generating PPT Theme..."
       : "Generate PPT Theme"}
   </button>
+</div>
+
+  </div>
+
+</div>
+
 </div>
 
             {/* =========================

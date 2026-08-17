@@ -20,26 +20,33 @@ app.use("/api", scanRoute);
 
 app.post("/api/generate-theme", async (req, res) => {
   try {
-    const { colors } = req.body;
+    const { theme } = req.body;
 
-    if (!Array.isArray(colors) || colors.length === 0) {
-      return res.status(400).json({
-        error: "Please select at least one colour."
-      });
-    }
+    if (!theme || typeof theme !== "object") {
+  return res.status(400).json({
+    error: "A valid theme is required."
+  });
+}
 
-    if (colors.length > 6) {
-      return res.status(400).json({
-        error: "You can select a maximum of 6 colours."
-      });
-    }
+if (
+  !Array.isArray(theme.accents) ||
+  theme.accents.length !== 6 ||
+  !Array.isArray(theme.text) ||
+  theme.text.length !== 2 ||
+  !Array.isArray(theme.background) ||
+  theme.background.length !== 2
+) {
+  return res.status(400).json({
+    error: "Complete theme colours are required."
+  });
+}
 
     const outputPath = require("path").join(
       __dirname,
       "Brand-Theme.pptx"
     );
 
-    await generatePptTheme(colors, outputPath);
+    await generatePptTheme(theme, outputPath);
 
     res.download(
       outputPath,
